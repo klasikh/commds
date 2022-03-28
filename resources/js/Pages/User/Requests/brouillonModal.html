@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>Jambon fumé</title>
+    <script type="text/javascript" src="jquery-1.3.2.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+  </head>
+  <body>
+    <ul id="menu">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="page_a.html">Page A</a></li>
+      <li><a href="page_b.html">Page B</a></li>
+    </ul>
+    <div id="content">
+      <h1>Accueil</h1>
+    
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </div>
+    <script>
+        $(document).ready(function(){
+  
+        /* Au clic sur un élément de menu... */
+        $('#menu li a').click(function(event){
+            
+            /* On récupère l'url du lien sur lequel on vient de cliquer. */
+            var url = $(this).attr('href');
+            
+            /*
+            * Dans notre bloc #content, on inject le contenu
+            * de la page ciblée (par le href) en se limitant
+            * à ce qui est dans le bloc #content.
+            */
+            $('#content').load(url + " #content");
+            
+            /*
+            * On évite le comportement par défaut qui est de 
+            * nous envoyer sur la page donnée dans le href).
+            */
+            event.preventDefault();
+        });
+        
+        });
+
+    </script>
+  </body>
+</html>
+
+
+
+
+
+<a href="htsign.html" id="openSignModal" @click.prevent="openSignModal">Approval</a>
+<div id="content">
+</div>
+
+<form method="POST" action="upload.php">
+
+<h1>PHP Signature Pad Example</h1>
+
+<div class="col-md-12">
+    <label class="" for="">Signature:</label>
+    <br/>
+    <div id="sig" >
+        
+    </div>
+    <br/>
+    <button id="clear">Clear Signature</button>
+    <textarea id="signature64" name="signed" style="display: none"></textarea>
+</div>
+
+<br/>
+<button class="btn btn-success">Submit</button>
+</form>
+
+<div>
+    <form @submit.prevent="addSign">
+        <div id="signModal">
+            <vueSignature ref="signature" v-model="form.sign" :sigOption="option" :w="'800px'" :h="'400px'" :disabled="disabled" :defaultUrl="dataUrl"></vueSignature> 
+            <!-- <vueSignature ref="signature1" :sigOption="option"></vueSignature>  -->
+            <button as="button" type="submit" class="btn btn-primary">Enregistrer</button>&nbsp;
+            <!-- <button @click="clear" class="btn btn-danger">Effacer</button>&nbsp; -->
+            <!-- <button @click="undo" class="btn btn-warning">Annuler</button>&nbsp; -->
+            <!-- <button @click="addWaterMark">addWaterMark</button> -->
+            <!-- <button @click="handleDisabled" class="btn btn-secondary">Désactiver</button> -->
+        </div>
+    </form>
+</div>
+
+  <div onselectstart="return false" id="signBox">
+<div id="signature-pad" class="signature-pad">
+<div class="signature-pad--body" id="sig">
+<canvas></canvas>
+</div>
+<div class="signature-pad--footer">
+<div class="description">Signez ici</div>
+
+<div class="signature-pad--actions">
+  <div>
+    <button type="button" class="btn btn-default" id="clear" data-action="clear">Effacer</button>
+    <!-- <button type="button" class="btn btn-default"    data-action="change-color">Change color</button> -->
+    <button type="button" class="btn btn-default" id="undo"  data-action="undo">Annuler</button>
+
+  </div>
+  <div>
+  <button type="button" class="button save" id="save-svg" data-action="save-svg" hidden=true></button>
+  <button type="button" class="button save" id="save-png" data-action="save-png" hidden=true></button>
+<button type="button" class="btn btn-primary"  style="background-color:blue" id="save-jpg" data-action="save-jpg">Enregistrer</button>
+            </div>
+</div>
+</div>
+</div>
+</div>
